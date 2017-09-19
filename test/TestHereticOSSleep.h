@@ -28,6 +28,10 @@ struct TestWaitHereticThreadContext
 extern unsigned int g_TotalCountAdd;
 extern unsigned int g_TotalHereticThreadComplate;
 
+#define USING_HERETICOS_THREAD
+#define Sleep_ForHereticThread
+
+
 class TestLoop :public HereticThread
 {
 public:
