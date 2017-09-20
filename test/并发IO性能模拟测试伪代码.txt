@@ -1,0 +1,48 @@
+//任务模式
+long long g_SleepIoCount=0;
+long long g_SleepIoLastCount=0;
+void IOTask()
+{
+	for(;;)
+	{
+		Sleep(100);// 100 ms 1000ms 10000ms
+		g_SleepIoCount++;
+	}
+}
+
+void TestIo()
+{
+	//创建一组并发任务
+	CreatTask(IOTask,1000000);
+	//监测IO计数
+	for(;;)
+	{
+		Sleep(3000)//3s统计一次
+		printf("Sleep Iops %d",(g_SleepIoCount-g_SleepIoLastCount)/3);
+	}
+	
+}
+
+//futuer await模式,无法for sleep
+
+void FutureSleep()
+{
+	Sleep(100);// 100 ms 1000ms 10000ms
+}
+
+void TestFuture()
+{
+	//创建100W Future
+	time now;
+	array FutureArray=CreateFuture(FutureSleep,1000000);
+	time FutureCreateOK;
+	//启动Future
+	for(1,1000000,FutureArray) StartFuture();
+	
+	time FutureStartOK;
+	for(1,1000000,FutureArray) WaitFuture();
+	
+	time FutureWaitOK;
+	print("UserTime FutureCreate %d FutureStart %d FutureWaitOver %d",FutureCreateOK-now,FutureStartOK-FutureCreateOK,FutureWaitOK-FutureStartOK);
+	
+}
