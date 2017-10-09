@@ -1,0 +1,69 @@
+
+测试并发任务下event性能，作为系统rpc串行性能分析的依据
+
+#define TASK_COUNT 100*10000
+
+Object Flower
+{
+	int nCheckSum; 			//用于校验成绩的正确性，防止一些人会觉得测试会作假
+	int nTransferCount;		//花朵传递次数
+}
+
+Flower g_Flower;
+
+Object FlowerTask()
+{
+	event 		m_FlowerEvent;		
+	event_ref 	m_NextFlowerEvent;  //下一个接收者
+	int m_TaskKey;
+	TaskLoop()
+	{
+		for(;;)
+		{
+			m_FlowerEvent.wait();
+			g_Flower.nCheckSum+=m_TaskKey;
+			g_Flower.nTransferCount++;
+			//设置激活事件
+			m_NextFlowerEvent.set();
+		}
+	}
+}
+//任务创建管理者
+Object FlowerManagerTask()
+{
+	FlowerTask m_FlowerTaskArray[TASK_COUNT];
+	TaskLoop()
+	{
+		//初始化任务事件环
+		for(int n=0;n<(TASK_COUNT-1);n++)
+		{
+			m_FlowerTaskArray[n].m_NextFlowerEvent=m_FlowerTaskArray[n+1].m_FlowerEvent;
+			m_FlowerTaskArray[n].m_TaskKey=n+1;
+		}
+		m_FlowerTaskArray[TASK_COUNT].m_NextFlowerEvent=m_FlowerTaskArray[0].m_FlowerEvent;
+		m_FlowerTaskArray[TASK_COUNT].m_TaskKey=TASK_COUNT;
+		
+		//启动事件链，开始击鼓传花
+		m_FlowerTaskArray[0].m_FlowerEvent.set();
+		for(;;)
+		{
+			time LastTime; 
+			nLastTransferCount=g_Flower.nTransferCount;
+			Sleep(3456);
+			time CurrentTime; 
+			printf("checksum=%d TransferCount=%d IOPS=%d",
+			g_Flower.nCheckSum,g_Flower.nTransferCount,(g_Flower.nTransferCount-nLastTransferCount)/(CurrentTime-LastTime)
+			);
+			
+		}
+	}
+}
+
+void TestIo()
+{
+	//创建一组并发任务
+	CreatTask(FlowerManagerTask);
+}
+
+
+
