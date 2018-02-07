@@ -1,4 +1,4 @@
-# HereticOS   
+# 异数OS（HereticOS）  
   
 ## 简介  
   
