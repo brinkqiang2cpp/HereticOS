@@ -1,0 +1,6 @@
+xnign是nginx目标能力的重新实做，目前简要规划如下
+
+1. haperscan 实现对请求参数的解参，需要满足异数OS 400WIO能的的驱动响应。
+2. 将静态页面渲染保存到like-redis系统。
+3. 由like-redis 为静态页面做cache加速。
+4. cgi不再是传统的进程创建，改为挂接到织梦师消息中间件系统，由织梦师Currency-Real提供动态页面响应服务。
