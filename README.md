@@ -6,7 +6,7 @@
   
 ### 短链接性能
   
-|异数OS |TCP单核短链接	|Seastar-Httpd长链接	|F-Stack nginx 短链接| F-Stack nginx 长链接|	Asio epoll长连接|	Asio epoll短链接| 
+|异数OS TCP单核短链接	|Seastar-Httpd长链接	|F-Stack nginx 短链接| F-Stack nginx 长链接|	Asio epoll长连接|	Asio epoll短链接| 
 | :-------- | --------|  --------|--------| -------- |--------|--------:|  
 |400W 	|70W|	9W |20W|14W（不可多核扩充）|	4W（不可多核扩充）|  
 
