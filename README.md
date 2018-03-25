@@ -4,9 +4,11 @@
   
 异数OS是一种高性能海量并发操作系统，提供每CPU核80M每秒的线程切换能力，40M的event生成以及io能力，目前实做的TCP协议栈可达到每CPU核20M的io能力，并发容量相比传统操作系统提升1000倍，IO性能提升100倍。
 
-###技术社区
-QQ社区群 652455784
-博客 https://blog.csdn.net/athlonxpx86
+###技术社区   
+QQ社区群 652455784   
+博客 https://blog.csdn.net/athlonxpx86   
+   
+      
   
 ### 短链接性能
   
