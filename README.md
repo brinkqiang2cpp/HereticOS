@@ -79,12 +79,12 @@ QQ社区群 652455784
     
 **2. AMD EPYC服务器供应商**  
 **正昱科技**  
-**http://www.gisdom.com/**  
+**www.gisdom.com**  
   
     
 **3.申威SW1621 平台供应商**  
 **成都申威**  
-**http://www.swcpu.cn/**   
+**www.swcpu.cn**   
   
     
     
